@@ -1,27 +1,26 @@
 <script setup>
 import { ref } from 'vue'
-import Top from './components/Left/Top.vue';
-import Cont from './components/Left/Cont.vue';
-import Bomt from './components/Left/Bomt.vue';
-import ConTent from './components/Cont/ConTent.vue';
-import BomTed from './components/Cont/BomTed.vue';
-import RigTop from './components/Right/RigTop.vue';
-import RigCont from './components/Right/RigCont.vue';
-import RigBomt from './components/Right/RigBomt.vue';
+import { useRouter } from 'vue-router'
+import {
+  LeftTopEcharts, LeftBomtEcharts, LeftContEcharts,
+  RightTopEcharts, RightBotEcharts, RightContEcharts,
+  ContContEcharts, ContBomtEcharts
+} from '@/composabol/index.js'
+const router = useRouter()
 const actId = ref(0)
 const itemList = ref([
   {
-    path: '',
+    path: '/',
     name: '综合监控',
     id: 0
   },
   {
-    path: '',
+    path: '/RealTime',
     name: '实时物流',
     id: 1
   },
   {
-    path: '',
+    path: '/MoniToring',
     name: '订单监控',
     id: 2
   },
@@ -51,6 +50,11 @@ const itemList = ref([
     id: 7
   }
 ])
+const route = (row) => {
+  console.log(row);
+  actId.value = row.id
+  router.push(row.path)
+}
 </script>
 <template>
   <div class="labout">
@@ -58,24 +62,27 @@ const itemList = ref([
       <p>智慧物流监控大屏</p>
       <div class="tabs-li">
         <div v-for="(item, index) in itemList" :key="index" class="item" :class="{ active: actId == index }"
-          @click="actId = index">{{ item.name }}</div>
+          @click="route(item)">{{ item.name }}</div>
       </div>
     </div>
-    <div class="echars">
-      <div class="left">
-        <Top/>
-        <Cont/>
-        <Bomt/>
+    <div>
+      <div class="echars" v-if="actId == 0">
+        <div class="left">
+          <LeftTopEcharts />
+          <LeftContEcharts />
+          <LeftBomtEcharts />
+        </div>
+        <div class="cont">
+          <ContContEcharts />
+          <ContBomtEcharts />
+        </div>
+        <div class="right">
+          <RightTopEcharts />
+          <RightContEcharts />
+          <RightBotEcharts />
+        </div>
       </div>
-      <div class="cont">
-        <ConTent/>
-        <BomTed/>
-      </div>
-      <div class="right">
-        <RigTop/>
-        <RigCont/>
-        <RigBomt/>
-      </div>
+      <RouterView />
     </div>
   </div>
 </template>
@@ -123,21 +130,25 @@ const itemList = ref([
   height: 100%;
   background: #000;
   box-sizing: border-box;
-  .echars{
+
+  .echars {
     display: flex;
-    .left{
+
+    .left {
       width: 25%;
       height: calc(100vh - 50px);
       display: flex;
       flex-direction: column;
       padding: 5px;
     }
-    .cont{
+
+    .cont {
       width: 50%;
       height: calc(100vh - 50px);
       padding: 5px 0;
     }
-    .right{
+
+    .right {
       width: 25%;
       height: calc(100vh - 50px);
       display: flex;
@@ -145,4 +156,5 @@ const itemList = ref([
       padding: 5px;
     }
   }
-}</style>
+}
+</style>

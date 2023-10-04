@@ -7,8 +7,21 @@ const router = createRouter({
     {
       path: '/',
       name: 'labout',
-      component: Labout
-    }
+      component: Labout,
+      children:[
+        {
+          path: '/RealTime',
+          name: 'realTime',
+          component: () => import('../views/RealTime/index.vue')
+        },
+        {
+          path: '/MoniToring',
+          name: 'monitoring',
+          component: () => import('../views/MoniToring/index.vue')
+        }
+      ]
+    },
+    
   ]
 })
 
