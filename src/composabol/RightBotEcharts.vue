@@ -20,7 +20,7 @@ const option = ref({
             roseType: 'area',
             color: colorA,
             itemStyle: {
-                borderRadius: 1
+                borderRadius: 8
             },
             data: [
                 { value: 15, name: '区域物流中心' },

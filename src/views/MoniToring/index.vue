@@ -97,7 +97,7 @@ const option1 = ref({
             roseType: 'area',
             color: colorA,
             itemStyle: {
-                borderRadius: 1
+                borderRadius: 8
             },
             data: [
                 { value: 5, name: '网运' },
@@ -181,7 +181,7 @@ const option2=ref({
                         // 数值样式
                         fontSize: '12',
                         color: '#92b6d4',
-                        textShadowColor: ""
+                         textShadowColor: ""
                     },
                 }
             }

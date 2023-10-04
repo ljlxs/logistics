@@ -25,12 +25,12 @@ const itemList = ref([
     id: 2
   },
   {
-    path: '',
+    path: '/DistriBution',
     name: '配送监控',
     id: 3
   },
   {
-    path: '',
+    path: '/ComPlaint',
     name: '投诉监控',
     id: 4
   },
@@ -50,7 +50,7 @@ const itemList = ref([
     id: 7
   }
 ])
-const route = (row) => {
+const skip = (row) => {
   console.log(row);
   actId.value = row.id
   router.push(row.path)
@@ -62,7 +62,7 @@ const route = (row) => {
       <p>智慧物流监控大屏</p>
       <div class="tabs-li">
         <div v-for="(item, index) in itemList" :key="index" class="item" :class="{ active: actId == index }"
-          @click="route(item)">{{ item.name }}</div>
+          @click="skip(item)">{{ item.name }}</div>
       </div>
     </div>
     <div>

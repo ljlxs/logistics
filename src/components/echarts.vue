@@ -32,7 +32,7 @@ onMounted(() => {
     height: 100%;
     display: flex;
     flex-direction: column;
-
+    box-sizing: border-box;
     >p {
         padding: 5px;
         color: #1b5c75;

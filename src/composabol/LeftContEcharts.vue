@@ -112,8 +112,6 @@ const orders=reactive([
             justify-content: space-evenly;
             padding: 10px 0;
             height: 100%;
-            .trimes{
-            }
             >span{
                 text-align: center;
             }

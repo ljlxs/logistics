@@ -18,6 +18,16 @@ const router = createRouter({
           path: '/MoniToring',
           name: 'monitoring',
           component: () => import('../views/MoniToring/index.vue')
+        },
+        {
+          path: '/DistriBution',
+          name: 'distribution',
+          component: () => import('../views/DistriBution/index.vue')
+        },
+        {
+          path: '/ComPlaint',
+          name: 'complaint',
+          component: () => import('../views/ComPlaint/index.vue')
         }
       ]
     },
