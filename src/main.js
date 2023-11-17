@@ -9,6 +9,7 @@ import vue3SeamlessScroll from "vue3-seamless-scroll";
 
 const app = createApp(App)
 
+
 app.use(createPinia())
 app.use(router)
 app.use(vue3SeamlessScroll);

@@ -33,8 +33,7 @@ const today=reactive({
 <style scoped lang="scss">
 .top{
     width: 100%;
-    height: 32%;
-    border: 1px solid red;
+    height: 100%;
     padding: 5px;
     box-sizing: border-box;
     >p{

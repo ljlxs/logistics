@@ -11,6 +11,13 @@ const option = ref({
             color: '#FFF'
         }
     },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '4%',
+        top: '4%',
+        containLabel: true
+    },
     series: [
         {
             name: 'Nightingale Chart',
@@ -40,7 +47,6 @@ const option = ref({
 <style scoped lang="scss">
 .RigBomt {
     width: 100%;
-    border: 1px solid red;
-    height: 32%;
+    height: 100%;
 }
 </style>

@@ -1,28 +1,28 @@
 <script setup>
 import echarts from '@/components/echarts.vue'
-import {ref} from 'vue'
-import {
-    LeftContEcharts, RightBotEcharts
-} from '@/composabol/index.js'
+import { ref } from 'vue'
 import 'echarts/extension/bmap/bmap';
 import china from '@/assets/china.js'
-const text=ref('订单走势')
+const text = ref('级别分布')
+const distance = [450, 980, 350, 970, 950];
 const option = ref({
     xAxis: {
         type: 'category',
-        boundaryGap: false,
-        data: ['06-02', '06-03', '06-04', '06-05', '06-06', '06-07', '06-08'],
+        data: ['合作站点', '加盟站点', '自营站点', '临时站点', '区域总部'],
         axisLine: {
             // 轴线设置
             show: false, // 显示轴线
             lineStyle: {
-                    // 轴线样式设置
-                    color: '', // 轴线颜色
-                }
+                // 轴线样式设置
+                color: '', // 轴线颜色
+                width: 1, // 轴线宽度
+                type: 'dashed' // 轴线类型-虚线
+            }
         },
         axisLabel: {
+            interval: 0,
             textStyle: {
-                color: '#c5c5c5',  //更改坐标轴文字颜色
+                color: '#F5F5F5',  //更改坐标轴文字颜色
                 fontSize: 12     //更改坐标轴文字大小
             }
         },
@@ -36,13 +36,13 @@ const option = ref({
         splitLine: {
             show: true,
             lineStyle: {
-                color: '#373c4f',
-                type: [5, 5], // [虚线宽度，虚线间隔]
+                color: '#979797',
+                type: [5, 10],
             },
         },
         axisLabel: {
             textStyle: {
-                color: '#c5c5c5',  //更改坐标轴文字颜色
+                color: '#F5F5F5',  //更改坐标轴文字颜色
                 fontSize: 12     //更改坐标轴文字大小
             }
         },
@@ -56,11 +56,72 @@ const option = ref({
     },
     series: [
         {
-            data: [62, 70, 40, 27, 67, 42, 91, 67, 65,95,8,32,84,70,16,44],
+            data: distance,
+            type: 'bar',
+            barWidth: 20,
+            itemStyle: {
+                barBorderRadius: [100, 100, 100, 100],
+                color: '#00b9eb'
+            }
+        }
+    ]
+})
+////////////////////////////////////////////////////////////////
+const text1 = ref('数量走势')
+const option1 = ref({
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['06-02', '06-03', '06-04', '06-05', '06-06', '06-07', '06-08'],
+        axisLine: {
+            // 轴线设置
+            show: false, // 显示轴线
+            lineStyle: {
+                // 轴线样式设置
+                color: '', // 轴线颜色
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#F5F5F5',  //更改坐标轴文字颜色
+                fontSize: 12     //更改坐标轴文字大小
+            }
+        },
+    },
+    yAxis: {
+        type: 'value',
+        axisLine: {
+            // 轴线设置
+            show: true, // 显示轴线
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#979797',
+                type: [5, 5], // [虚线宽度，虚线间隔]
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#F5F5F5',  //更改坐标轴文字颜色
+                fontSize: 12     //更改坐标轴文字大小
+            }
+        },
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '4%',
+        top: '4%',
+        containLabel: true
+    },
+    series: [
+        {
+            data: [67, 517, 761, 511, 709, 557, 479],
             type: 'line',
-            color: '#531e28',
+            color: '#9b3034',
             areaStyle: {
-                color: '#531e28'
+                color: '#9b3034'
             },
             label: {
                 show: true,
@@ -79,193 +140,6 @@ const option = ref({
         }
     ]
 })
-////////////////////////////////////////////////////////////////
-const text1=ref('类型分布')
-let colorA = ["#968afc", "#fc8823", "#5fb876", '#73c0df'];
-const option1 = ref({
-    legend: {
-        top: 'center',
-        right: 'right',
-        textStyle: {
-            color: '#FFF'
-        }
-    },
-    series: [
-        {
-            name: 'Nightingale Chart',
-            type: 'pie',
-            radius: [0, 70],
-            center: ['35%', '50%'],
-            roseType: 'area',
-            color: colorA,
-            itemStyle: {
-                borderRadius: 8
-            },
-            data: [
-                { value: 5, name: '网运' },
-                { value: 15, name: '短途' },
-                { value: 10, name: '上图' },
-                { value: 8, name: '货运' }
-            ]
-        }
-    ]
-})
-////////////////////////////////////////////////////////////////
-const text2=ref('发件地分布')
-const distance = [34, 7, 65, 5, 29, 77,14];
-const option2=ref({
-        xAxis: {
-            type: 'category',
-            data: ['深圳', '上海', '香港', '成都', '西安', '太原','厦门'],
-            axisLine: {
-                // 轴线设置
-                show: false, // 显示轴线
-                lineStyle: {
-                    // 轴线样式设置
-                    color: '', // 轴线颜色
-                    width: 1, // 轴线宽度
-                    type: 'dashed' // 轴线类型-虚线
-                }
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#F5F5F5',  //更改坐标轴文字颜色
-                    fontSize: 12     //更改坐标轴文字大小
-                }
-            },
-        },
-        yAxis: {
-            type: 'value',
-            axisLine: {
-                // 轴线设置
-                show: true, // 显示轴线
-            },
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: '#979797',
-                    type: [5, 10],
-                },
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#F5F5F5',  //更改坐标轴文字颜色
-                    fontSize: 12     //更改坐标轴文字大小
-                }
-            },
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '4%',
-            top: '4%',
-            containLabel: true
-        },
-        series: [
-            {
-                data: distance,
-                type: 'bar',
-                barWidth: 20,
-                itemStyle: {
-                    barBorderRadius: [100, 100, 100, 100],
-                    color: '#09f2a8'
-                },
-                label: {
-                    show: true,
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        formatter: function (val) {
-                            return val.value;
-                        }
-                    },
-                    textStyle: {
-                        // 数值样式
-                        fontSize: '12',
-                        color: '#92b6d4',
-                         textShadowColor: ""
-                    },
-                }
-            }
-        ]
-    })
-////////////////////////////////////////////////////////////////
-const text3=ref('目的地分布')
-const distance1 = [8, 78, 72, 97, 74, 85,96];
-const option3=ref({
-        xAxis: {
-            type: 'category',
-            data: ['乌鲁木齐', '', '西安', '', '平顶山', '','贵阳'],
-            axisLine: {
-                // 轴线设置
-                show: false, // 显示轴线
-                lineStyle: {
-                    // 轴线样式设置
-                    color: '', // 轴线颜色
-                    width: 1, // 轴线宽度
-                    type: 'dashed' // 轴线类型-虚线
-                }
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#F5F5F5',  //更改坐标轴文字颜色
-                    fontSize: 12     //更改坐标轴文字大小
-                }
-            },
-        },
-        yAxis: {
-            type: 'value',
-            axisLine: {
-                // 轴线设置
-                show: true, // 显示轴线
-            },
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: '#979797',
-                    type: [5, 10],
-                },
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#F5F5F5',  //更改坐标轴文字颜色
-                    fontSize: 12     //更改坐标轴文字大小
-                }
-            },
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '4%',
-            top: '4%',
-            containLabel: true
-        },
-        series: [
-            {
-                data: distance1,
-                type: 'bar',
-                barWidth: 20,
-                itemStyle: {
-                    barBorderRadius: [100, 100, 100, 100],
-                    color: '#01bdf1'
-                },
-                label: {
-                    show: true,
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        formatter: function (val) {
-                            return val.value;
-                        }
-                    },
-                    textStyle: {
-                        // 数值样式
-                        color: '#adb2c1',
-                    },
-                }
-            }
-        ]
-    })
 ////////////////////////////////////////////////////////////////
 const text4 = ref("")
   var allData = {
@@ -1328,36 +1202,137 @@ const text4 = ref("")
       };
 </script>
 <template>
-    <div class="monis">
+    <div class="LatticePoint">
+        <div class="top">
+            <p>基础信息</p>
+            <div class="list">
+                <div class="item color1">
+                    <img src="@/assets/logo.svg" alt="">
+                    <div>
+                        <p class="p">9493<span>个</span></p>
+                        <p class="sp">网点数量</p>
+                    </div>
+                </div>
+                <div class="item color2">
+                    <img src="@/assets/logo.svg" alt="">
+                    <div>
+                        <p class="p">9493<span>个</span></p>
+                        <p class="sp">网点数量</p>
+                    </div>
+                </div>
+                <div class="item color3">
+                    <img src="@/assets/logo.svg" alt="">
+                    <div>
+                        <p class="p">9493<span>个</span></p>
+                        <p class="sp">网点数量</p>
+                    </div>
+                </div>
+                <div class="item color4">
+                    <img src="@/assets/logo.svg" alt="">
+                    <div>
+                        <p class="p">9493<span>个</span></p>
+                        <p class="sp">网点数量</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <echarts :text="text" :option="option" />
+        </div>
+        <div>
+            <echarts :text="text1" :option="option1" />
+        </div>
         <div class="cont1">
             <echarts :text="text4" :option="option4" :china="china" />
         </div>
-        <div><LeftContEcharts /></div>
-        <div><RightBotEcharts /></div>
-        <div><echarts :text="text" :option="option" /></div>
-        <div><echarts :text="text1" :option="option1" /></div>
-        <div><echarts :text="text2" :option="option2" /></div>
-        <div><echarts :text="text3" :option="option3" /></div>
     </div>
 </template>
 <style scoped lang="scss">
-.monis{
+.LatticePoint {
     display: grid;
-    grid-template-columns:1fr 1fr 1fr 1fr;/* 设置列和行的尺寸。 */
-    grid-template-rows: repeat(3,32.6%);/* 设置列和行的尺寸。 */
+    grid-template-columns: 1fr 2fr;
+    /* 设置列和行的尺寸。 */
+    grid-template-rows: repeat(3, 32.6%);
+    /* 设置列和行的尺寸。 */
     grid-gap: calc(100vw*10/1920);
     height: 100%;
-    height:calc(100vh - calc(100vw*45/1920));
+    height: calc(100vh - calc(100vw*45/1920));
     padding: calc(100vw*10/1920);
     box-sizing: border-box;
-    >div{
+
+    >div {
         border: 1px solid red;
         height: 100%;
         width: 100%;
-        
+
     }
     .cont1{
-        grid-area: 1 / 5 / 3 / 2;/* 第几行/占几个/多少列/占几列*/
+        grid-area: 1/2/4/4;/* 第几行/占几个/多少列/占几列*/
     }
 }
-</style>
+
+.top {
+    border: 1px solid red;
+
+    >p {
+        padding: 5px;
+        color: #1b5c75;
+    }
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+
+        .item {
+            width: 45%;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+
+            >img {
+                width: 30px;
+                height: 30px;
+                margin: 0 40px;
+            }
+
+            .p {
+                font-size: 27px;
+                color: #9c6234;
+
+                >span {
+                    font-size: 24px;
+                }
+            }
+
+            .sp {
+                font-size: 20px;
+                color: #fff;
+            }
+        }
+        .color1 {
+            border-right: 1px solid #264e45;
+
+            .p {
+                color: #9c6234;
+            }
+        }
+        .color2 {
+            .p {
+                color: #5a9d55;
+            }
+        }
+        .color3 {
+            border-right: 1px solid #264e45;
+            .p {
+                color: #924649;
+            }
+        }
+        .color4 {
+            .p {
+                color: #00aae5;
+            }
+        }
+    }
+}</style>

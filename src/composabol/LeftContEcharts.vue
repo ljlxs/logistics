@@ -79,8 +79,7 @@ const orders=reactive([
 <style scoped lang="scss">
 .Cont {
     width: 100%;
-    height: 32%;
-    border: 1px solid red;
+    height: 100%;
     margin: 5px 0;
     padding: 10px;
     box-sizing: border-box;

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-const props=defineProps({
+import 'echarts/extension/bmap/bmap';
+const props = defineProps({
     text: {
         type: String,
         default: () => [],
@@ -8,11 +9,16 @@ const props=defineProps({
     option: {
         type: Object,
         default: () => [],
+    },
+    china: {
+        type: Object,
+        default: () => [],
     }
 })
 import * as echarts from 'echarts';
 const bar = ref(null)
 onMounted(() => {
+    echarts.registerMap('china', { geoJSON: props.china })
     const myChart = echarts.init(bar.value)
     myChart.setOption(props.option);
 })
@@ -33,6 +39,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+
     >p {
         padding: 5px;
         color: #1b5c75;

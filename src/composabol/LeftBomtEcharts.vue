@@ -83,7 +83,6 @@ const option = ref({
 <style scoped lang="scss">
 .bomt {
     width: 100%;
-    border: 1px solid red;
-    height: 32%;
+    height: 100%;
 }
 </style>

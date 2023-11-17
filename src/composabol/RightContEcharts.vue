@@ -86,8 +86,7 @@ const option=ref({
 <style scoped lang="scss">
 .RigCont {
     width: 100%;
-    border: 1px solid red;
     margin: 5px 0;
-    height: 32%;
+    height: 100%;
     }
 </style>

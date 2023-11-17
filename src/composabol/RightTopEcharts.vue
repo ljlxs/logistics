@@ -333,6 +333,13 @@ onMounted(async () => {
                 show: false,
             },
         },
+        grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '4%',
+        top: '4%',
+        containLabel: true
+    },
         series: [
             {
                 data: [value],
@@ -370,12 +377,13 @@ onMounted(async () => {
 <style scoped lang="scss">
 .box {
     width: 100%;
-    border: 1px solid red;
-    height: 32%;
-
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
     >p {
         color: #367c92;
-        padding: 5px;
+        // padding: 5px;
     }
 
     .RigTop {

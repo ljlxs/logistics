@@ -28,6 +28,21 @@ const router = createRouter({
           path: '/ComPlaint',
           name: 'complaint',
           component: () => import('../views/ComPlaint/index.vue')
+        },
+        {
+          path: '/EmploYee',
+          name: 'employee',
+          component: () => import('../views/EmploYee/index.vue')
+        },
+        {
+          path: '/WareHouse',
+          name: 'warehouse',
+          component: () => import('../views/WareHouse/index.vue')
+        },
+        {
+          path: '/LatticePoint',
+          name: 'latticepoint',
+          component: () => import('../views/LatticePoint/index.vue')
         }
       ]
     },

@@ -601,6 +601,29 @@ const option8 = ref({
                 </div>
             </div>
         </div>
+        <div><echarts :text="text1" :option="option1" /></div>
+        <div><echarts :text="text2" :option="option2" /></div>
+        <div><echarts :text="text3" :option="option3" /></div>
+        <div><echarts :text="text4" :option="option4" /></div>
+        <div><echarts :text="text5" :option="option5" /></div>
+        <div><echarts :text="text6" :option="option6" /></div>
+        <div><echarts :text="text7" :option="option7" /></div>
+        <div><echarts :text="text8" :option="option8" /></div>
+        <!-- <div class="top">
+            <p>{{ text }}</p>
+            <div class="list">
+                <p>订单数:</p>
+                <div class="item orange" v-for="(item, index) in today.in" :key="index">
+                    {{ item }}
+                </div>
+            </div>
+            <div class="list">
+                <p>员工数:</p>
+                <div class="item green" v-for="(item, index) in today.end" :key="index">
+                    {{ item }}
+                </div>
+            </div>
+        </div>
         <div>
             <echarts :text="text1" :option="option1" />
         </div>
@@ -624,59 +647,57 @@ const option8 = ref({
         </div>
         <div>
             <echarts :text="text8" :option="option8" />
-        </div>
+        </div> -->
     </div>
 </template>
 <style scoped lang="scss">
-.DistriBution {
-    width: 100%;
-    height: calc(100vh - 66px);
-    display: flex;
-    flex-wrap: wrap;
-
-    >div {
-        width: 33%;
-        height: 33%;
-        margin: 2px;
+.DistriBution{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;/* 设置列和行的尺寸。 */
+    grid-template-rows: repeat(3,32.6%);/* 设置列和行的尺寸。 */
+    grid-gap: calc(100vw*10/1920);
+    height: 100%;
+    height:calc(100vh - calc(100vw*45/1920));
+    padding: calc(100vw*10/1920);
+    box-sizing: border-box;
+    >div{
         border: 1px solid red;
+        height: 100%;
+        width: 100%;
     }
-
-    .top {
-        >p {
-            color: #519aa4;
-            margin: 5px;
+}
+.top{
+    width: 100%;
+    height: 32%;
+    border: 1px solid red;
+    padding: 5px;
+    box-sizing: border-box;
+    >p{
+        color: #519aa4;
+    }
+    .list{
+        color: white;
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        >p{
+            margin: 0 15px;
         }
-
-        .list {
-            color: white;
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-
-            >p {
-                margin: 0 15px;
-            }
-
-            .item {
-                font-size: 40px;
-                padding: 15px;
-                background: #1f2120;
-                margin: 10px;
-            }
-
-            .orange {
-                color: #d77629;
-            }
-
-            .green {
-                color: #66b658;
-            }
-
-            .red {
-                color: #b95151;
-            }
+        .item{
+            font-size: 20px;
+            padding: 10px;
+            background: #1f2120;
+            margin: 10px;
+        }
+        .orange{
+            color: #d77629;
+        }
+        .green{
+            color: #66b658;
+        }
+        .red{
+            color: #b95151;
         }
     }
-
 }
 </style>

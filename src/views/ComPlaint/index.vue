@@ -245,6 +245,20 @@ const orders = reactive([
         statusL: '退货',
         statusLs: '待处理'
     },
+    {
+        from: '西安',
+        to: '上海',
+        date: new Date().toLocaleString(),
+        statusL: '退货',
+        statusLs: '待处理1'
+    },
+    {
+        from: '西安',
+        to: '上海',
+        date: new Date().toLocaleString(),
+        statusL: '退货',
+        statusLs: '待处理2'
+    }
 ])
 ////////////////////////////////////////////////////////////////
 const text3 = ref('状态分布')
@@ -279,158 +293,159 @@ const option3 = ref({
 })
 ////////////////////////////////////////////////////////////////
 const text4 = ref('投诉排行')
-const distance = [61, 82, 85, 21, 5, 52,30,26];
-const option4=ref({
-        xAxis: {
-            type: 'category',
-            data: ['丢件', '态度不好', '损坏', '时间慢', '少件', '客服问题','保险问题','破损'],
-            axisLine: {
-                // 轴线设置
-                show: false, // 显示轴线
-                lineStyle: {
-                    // 轴线样式设置
-                    color: '', // 轴线颜色
-                    width: 1, // 轴线宽度
-                    type: 'dashed' // 轴线类型-虚线
-                }
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#F5F5F5',  //更改坐标轴文字颜色
-                    fontSize: 12     //更改坐标轴文字大小
-                }
-            },
-        },
-        yAxis: {
-            type: 'value',
-            axisLine: {
-                // 轴线设置
-                show: true, // 显示轴线
-            },
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: '#979797',
-                    type: [5, 10],
-                },
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#F5F5F5',  //更改坐标轴文字颜色
-                    fontSize: 12     //更改坐标轴文字大小
-                }
-            },
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '4%',
-            top: '4%',
-            containLabel: true
-        },
-        series: [
-            {
-                data: distance,
-                type: 'bar',
-                barWidth: 20,
-                itemStyle: {
-                    barBorderRadius: [100, 100, 100, 100],
-                    color: '#04ebb5'
-                },
-                label: {
-                    show: true,
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        formatter: function (val) {
-                            return val.value;
-                        }
-                    },
-                    textStyle: {
-                        // 数值样式
-                        color: '#adb2c1',
-                    },
-                }
+const distance = [61, 82, 85, 21, 5, 52, 30, 26];
+const option4 = ref({
+    xAxis: {
+        type: 'category',
+        data: ['丢件', '态度不好', '损坏', '时间慢', '少件', '客服问题', '保险问题', '破损'],
+        axisLine: {
+            // 轴线设置
+            show: false, // 显示轴线
+            lineStyle: {
+                // 轴线样式设置
+                color: '', // 轴线颜色
+                width: 1, // 轴线宽度
+                type: 'dashed' // 轴线类型-虚线
             }
-        ]
-    })
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#F5F5F5',  //更改坐标轴文字颜色
+                fontSize: 12     //更改坐标轴文字大小
+            }
+        },
+    },
+    yAxis: {
+        type: 'value',
+        axisLine: {
+            // 轴线设置
+            show: true, // 显示轴线
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#979797',
+                type: [5, 10],
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#F5F5F5',  //更改坐标轴文字颜色
+                fontSize: 12     //更改坐标轴文字大小
+            }
+        },
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '4%',
+        top: '4%',
+        containLabel: true
+    },
+    series: [
+        {
+            data: distance,
+            type: 'bar',
+            barWidth: 20,
+            itemStyle: {
+                barBorderRadius: [100, 100, 100, 100],
+                color: '#04ebb5'
+            },
+            label: {
+                show: true,
+                normal: {
+                    show: true,
+                    position: 'top',
+                    formatter: function (val) {
+                        return val.value;
+                    }
+                },
+                textStyle: {
+                    // 数值样式
+                    color: '#adb2c1',
+                },
+            }
+        }
+    ]
+})
 ////////////////////////////////////////////////////////////////////////
 const text5 = ref('处理时间分布')
-const distance2 = [10, 82, 85, 21, 5, 52,30];
-const option5=ref({
-        xAxis: {
-            type: 'category',
-            data: ['1天内', '2天内', '3天内', '4天内', '5天内', '7天内','其他'],
-            axisLine: {
-                // 轴线设置
-                show: false, // 显示轴线
-                lineStyle: {
-                    // 轴线样式设置
-                    color: '', // 轴线颜色
-                    width: 1, // 轴线宽度
-                    type: 'dashed' // 轴线类型-虚线
-                }
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#F5F5F5',  //更改坐标轴文字颜色
-                    fontSize: 12     //更改坐标轴文字大小
-                }
-            },
-        },
-        yAxis: {
-            type: 'value',
-            axisLine: {
-                // 轴线设置
-                show: true, // 显示轴线
-            },
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: '#979797',
-                    type: [5, 10],
-                },
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#F5F5F5',  //更改坐标轴文字颜色
-                    fontSize: 12     //更改坐标轴文字大小
-                }
-            },
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '4%',
-            top: '4%',
-            containLabel: true
-        },
-        series: [
-            {
-                data: distance2,
-                type: 'bar',
-                barWidth: 20,
-                itemStyle: {
-                    barBorderRadius: [100, 100, 100, 100],
-                    color: '#de5f62'
-                },
-                label: {
-                    show: true,
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        formatter: function (val) {
-                            return val.value;
-                        }
-                    },
-                    textStyle: {
-                        // 数值样式
-                        color: '#adb2c1',
-                    },
-                }
+const distance2 = [10, 82, 85, 21, 5, 52, 30];
+const option5 = ref({
+    xAxis: {
+        type: 'category',
+        data: ['1天内', '2天内', '3天内', '4天内', '5天内', '7天内', '其他'],
+        axisLine: {
+            // 轴线设置
+            show: false, // 显示轴线
+            lineStyle: {
+                // 轴线样式设置
+                color: '', // 轴线颜色
+                width: 1, // 轴线宽度
+                type: 'dashed' // 轴线类型-虚线
             }
-        ]
-    })
+        },
+        axisLabel: {
+            interval: 0,
+            textStyle: {
+                color: '#F5F5F5',  //更改坐标轴文字颜色
+                fontSize: 12     //更改坐标轴文字大小
+            }
+        },
+    },
+    yAxis: {
+        type: 'value',
+        axisLine: {
+            // 轴线设置
+            show: true, // 显示轴线
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#979797',
+                type: [5, 10],
+            },
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#F5F5F5',  //更改坐标轴文字颜色
+                fontSize: 12     //更改坐标轴文字大小
+            }
+        },
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '4%',
+        top: '4%',
+        containLabel: true
+    },
+    series: [
+        {
+            data: distance2,
+            type: 'bar',
+            barWidth: 20,
+            itemStyle: {
+                barBorderRadius: [100, 100, 100, 100],
+                color: '#de5f62'
+            },
+            label: {
+                show: true,
+                normal: {
+                    show: true,
+                    position: 'top',
+                    formatter: function (val) {
+                        return val.value;
+                    }
+                },
+                textStyle: {
+                    // 数值样式
+                    color: '#adb2c1',
+                },
+            }
+        }
+    ]
+})
 ////////////////////////////////////////////////////////////////////////////////////////////////
 const text6 = ref("用时分布")
 const option6 = ref({
@@ -560,9 +575,9 @@ const option7 = ref({
             // 轴线设置
             show: false, // 显示轴线
             lineStyle: {
-                    // 轴线样式设置
-                    color: '', // 轴线颜色
-                }
+                // 轴线样式设置
+                color: '', // 轴线颜色
+            }
         },
         axisLabel: {
             textStyle: {
@@ -739,8 +754,8 @@ const option8 = {
             // 分隔
             type: 'pictorialBar',
             itemStyle: {
-                    borderRadius: [5, 5, 5, 5],
-                    color: '#ff4b53',
+                borderRadius: [5, 5, 5, 5],
+                color: '#ff4b53',
             },
             symbolRepeat: 'fixed',
             symbolMargin: 4,
@@ -754,69 +769,133 @@ const option8 = {
             z: 0,
             zlevel: 8,
             label: {
+                show: true,
+                normal: {
                     show: true,
-                    normal: {
-                        show: true,
-                        position: 'top',
-                        formatter: function (val) {
-                            return val.value;
-                        }
-                    },
-                    textStyle: {
-                        // 数值样式
-                        color: '#adb2c1',
-                    },
-                }
+                    position: 'top',
+                    formatter: function (val) {
+                        return val.value;
+                    }
+                },
+                textStyle: {
+                    // 数值样式
+                    color: '#adb2c1',
+                },
+            }
         },
     ],
 };
 </script>
 <template>
-    <div class="complaint">
-        <div>
-            <echarts :text="text" :option="option" />
-        </div>
-        <div>
-            <echarts :text="text1" :option="option1" />
-        </div>
-        <div class="Cont">
-            <p>{{ text2 }}</p>
-            <div class="list">
-                <div class="th">
-                    <div class="tr">问题</div>
-                    <div class="tr">时间</div>
-                    <div class="tr">状态</div>
-                </div>
-                <vue3-seamless-scroll :list="orders" class="scroll">
-                    <div class="item" v-for="(item, index) in orders" :key="index">
-                        <span>{{ item.statusL }}</span>
-                        <span class="trimes">{{ item.date }}</span>
-                        <span style="color:#1f176a">{{ item.statusLs }}</span>
+        <div class="complaints">
+            <div>
+                <echarts :text="text" :option="option" />
+            </div>
+            <div>
+                <echarts :text="text1" :option="option1" />
+            </div>
+            <div class="Cont">
+                <p>{{ text2 }}</p>
+                <div class="list">
+                    <div class="th">
+                        <div class="tr">问题</div>
+                        <div class="tr">时间</div>
+                        <div class="tr">状态</div>
                     </div>
-                </vue3-seamless-scroll>
+                    <vue3-seamless-scroll :list="orders" class="scroll">
+                        <div class="item" v-for="(item, index) in orders" :key="index">
+                            <span>{{ item.statusL }}</span>
+                            <span class="trimes">{{ item.date }}</span>
+                            <span style="color:#1f176a">{{ item.statusLs }}</span>
+                        </div>
+                    </vue3-seamless-scroll>
+                </div>
+            </div>
+            <div>
+                <echarts :text="text3" :option="option3" />
+            </div>
+            <div>
+                <echarts :text="text4" :option="option4" />
+            </div>
+            <div>
+                <echarts :text="text5" :option="option5" />
+            </div>
+            <div>
+                <echarts :text="text6" :option="option6" />
+            </div>
+            <div>
+                <echarts :text="text7" :option="option7" />
+            </div>
+            <div>
+                <echarts :text="text8" :option="option8" />
             </div>
         </div>
-        <div>
-            <echarts :text="text3" :option="option3" />
-        </div>
-        <div>
-            <echarts :text="text4" :option="option4" />
-        </div>
-        <div>
-            <echarts :text="text5" :option="option5" />
-        </div>
-        <div>
-            <echarts :text="text6" :option="option6" />
-        </div>
-        <div>
-            <echarts :text="text7" :option="option7" />
-        </div>
-        <div>
-            <echarts :text="text8" :option="option8" />
-        </div>
-    </div>
 </template>
 <style scoped lang="scss">
+.complaints{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;/* 设置列和行的尺寸。 */
+    grid-template-rows: repeat(3,32.6%);/* 设置列和行的尺寸。 */
+    grid-gap: calc(100vw*10/1920);
+    height: 100%;
+    height:calc(100vh - calc(100vw*45/1920));
+    padding: calc(100vw*10/1920);
+    box-sizing: border-box;
+    >div{
+        border: 1px solid red;
+        height: 100%;
+        width: 100%;
+    }
+    .Cont {
+        height: 100%;
+        border: 1px solid red;
+        padding: 10px;
+        box-sizing: border-box;
+
+        >p {
+            color: #519aa4;
+        }
+
+        .list {
+            margin-top: 10px;
+            padding-top: 5px;
+            height: calc(100% - 38px);
+
+            .th {
+                display: flex;
+                width: 100%;
+                background: #2aa7ed;
+                color: white;
+                border-radius: 2px;
+                justify-content: space-evenly;
+
+                .tr {
+                    text-align: center;
+                }
+            }
+
+            .scroll {
+                height: 97%;
+                overflow: hidden;
+            }
+
+            .item {
+                color: white;
+                display: flex;
+                justify-content: space-evenly;
+                padding: 10px 0;
+                height: 100%;
+                text-align: center;
+
+                >span {
+                    text-align: center;
+                    flex: 1;
+                }
+
+            }
+        }
+    }
+}
 .complaint {
     width: 100%;
     height: calc(100vh - 66px);
@@ -870,12 +949,16 @@ const option8 = {
                 justify-content: space-evenly;
                 padding: 10px 0;
                 height: 100%;
+                text-align: center;
+
                 >span {
                     text-align: center;
+                    flex: 1;
                 }
 
             }
         }
     }
 
-}</style>
+}
+</style>

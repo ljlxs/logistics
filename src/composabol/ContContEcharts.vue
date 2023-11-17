@@ -1,511 +1,3261 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import echarts from '@/components/echarts.vue'
-const main = ref(null)
-const text = ref('')
-  var data = [
-    { name: '海门', value: 9 },
-    { name: '鄂尔多斯', value: 12 },
-    { name: '招远', value: 12 },
-    { name: '舟山', value: 12 },
-    { name: '齐齐哈尔', value: 14 },
-    { name: '盐城', value: 15 },
-    { name: '赤峰', value: 16 },
-    { name: '青岛', value: 18 },
-    { name: '乳山', value: 18 },
-    { name: '金昌', value: 19 },
-    { name: '泉州', value: 21 },
-    { name: '莱西', value: 21 },
-    { name: '日照', value: 21 },
-    { name: '胶南', value: 22 },
-    { name: '南通', value: 23 },
-    { name: '拉萨', value: 24 },
-    { name: '云浮', value: 24 },
-    { name: '梅州', value: 25 },
-    { name: '文登', value: 25 },
-    { name: '上海', value: 25 },
-    { name: '攀枝花', value: 25 },
-    { name: '威海', value: 25 },
-    { name: '承德', value: 25 },
-    { name: '厦门', value: 26 },
-    { name: '汕尾', value: 26 },
-    { name: '潮州', value: 26 },
-    { name: '丹东', value: 27 },
-    { name: '太仓', value: 27 },
-    { name: '曲靖', value: 27 },
-    { name: '烟台', value: 28 },
-    { name: '福州', value: 29 },
-    { name: '瓦房店', value: 30 },
-    { name: '即墨', value: 30 },
-    { name: '抚顺', value: 31 },
-    { name: '玉溪', value: 31 },
-    { name: '张家口', value: 31 },
-    { name: '阳泉', value: 31 },
-    { name: '莱州', value: 32 },
-    { name: '湖州', value: 32 },
-    { name: '汕头', value: 32 },
-    { name: '昆山', value: 33 },
-    { name: '宁波', value: 33 },
-    { name: '湛江', value: 33 },
-    { name: '揭阳', value: 34 },
-    { name: '荣成', value: 34 },
-    { name: '连云港', value: 35 },
-    { name: '葫芦岛', value: 35 },
-    { name: '常熟', value: 36 },
-    { name: '东莞', value: 36 },
-    { name: '河源', value: 36 },
-    { name: '淮安', value: 36 },
-    { name: '泰州', value: 36 },
-    { name: '南宁', value: 37 },
-    { name: '营口', value: 37 },
-    { name: '惠州', value: 37 },
-    { name: '江阴', value: 37 },
-    { name: '蓬莱', value: 37 },
-    { name: '韶关', value: 38 },
-    { name: '嘉峪关', value: 38 },
-    { name: '广州', value: 38 },
-    { name: '延安', value: 38 },
-    { name: '太原', value: 39 },
-    { name: '清远', value: 39 },
-    { name: '中山', value: 39 },
-    { name: '昆明', value: 39 },
-    { name: '寿光', value: 40 },
-    { name: '盘锦', value: 40 },
-    { name: '长治', value: 41 },
-    { name: '深圳', value: 41 },
-    { name: '珠海', value: 42 },
-    { name: '宿迁', value: 43 },
-    { name: '咸阳', value: 43 },
-    { name: '铜川', value: 44 },
-    { name: '平度', value: 44 },
-    { name: '佛山', value: 44 },
-    { name: '海口', value: 44 },
-    { name: '江门', value: 45 },
-    { name: '章丘', value: 45 },
-    { name: '肇庆', value: 46 },
-    { name: '大连', value: 47 },
-    { name: '临汾', value: 47 },
-    { name: '吴江', value: 47 },
-    { name: '石嘴山', value: 49 },
-    { name: '沈阳', value: 50 },
-    { name: '苏州', value: 50 },
-    { name: '茂名', value: 50 },
-    { name: '嘉兴', value: 51 },
-    { name: '长春', value: 51 },
-    { name: '胶州', value: 52 },
-    { name: '银川', value: 52 },
-    { name: '张家港', value: 52 },
-    { name: '三门峡', value: 53 },
-    { name: '锦州', value: 54 },
-    { name: '南昌', value: 54 },
-    { name: '柳州', value: 54 },
-    { name: '三亚', value: 54 },
-    { name: '自贡', value: 56 },
-    { name: '吉林', value: 56 },
-    { name: '阳江', value: 57 },
-    { name: '泸州', value: 57 },
-    { name: '西宁', value: 57 },
-    { name: '宜宾', value: 58 },
-    { name: '呼和浩特', value: 58 },
-    { name: '成都', value: 58 },
-    { name: '大同', value: 58 },
-    { name: '镇江', value: 59 },
-    { name: '桂林', value: 59 },
-    { name: '张家界', value: 59 },
-    { name: '宜兴', value: 59 },
-    { name: '北海', value: 60 },
-    { name: '西安', value: 61 },
-    { name: '金坛', value: 62 },
-    { name: '东营', value: 62 },
-    { name: '牡丹江', value: 63 },
-    { name: '遵义', value: 63 },
-    { name: '绍兴', value: 63 },
-    { name: '扬州', value: 64 },
-    { name: '常州', value: 64 },
-    { name: '潍坊', value: 65 },
-    { name: '重庆', value: 66 },
-    { name: '台州', value: 67 },
-    { name: '南京', value: 67 },
-    { name: '滨州', value: 70 },
-    { name: '贵阳', value: 71 },
-    { name: '无锡', value: 71 },
-    { name: '本溪', value: 71 },
-    { name: '克拉玛依', value: 72 },
-    { name: '渭南', value: 72 },
-    { name: '马鞍山', value: 72 },
-    { name: '宝鸡', value: 72 },
-    { name: '焦作', value: 75 },
-    { name: '句容', value: 75 },
-    { name: '北京', value: 79 },
-    { name: '徐州', value: 79 },
-    { name: '衡水', value: 80 },
-    { name: '包头', value: 80 },
-    { name: '绵阳', value: 80 },
-    { name: '乌鲁木齐', value: 84 },
-    { name: '枣庄', value: 84 },
-    { name: '杭州', value: 84 },
-    { name: '淄博', value: 85 },
-    { name: '鞍山', value: 86 },
-    { name: '溧阳', value: 86 },
-    { name: '库尔勒', value: 86 },
-    { name: '安阳', value: 90 },
-    { name: '开封', value: 90 },
-    { name: '济南', value: 92 },
-    { name: '德阳', value: 93 },
-    { name: '温州', value: 95 },
-    { name: '九江', value: 96 },
-    { name: '邯郸', value: 98 },
-    { name: '临安', value: 99 },
-    { name: '兰州', value: 99 },
-    { name: '沧州', value: 100 },
-    { name: '临沂', value: 103 },
-    { name: '南充', value: 104 },
-    { name: '天津', value: 105 },
-    { name: '富阳', value: 106 },
-    { name: '泰安', value: 112 },
-    { name: '诸暨', value: 112 },
-    { name: '郑州', value: 113 },
-    { name: '哈尔滨', value: 114 },
-    { name: '聊城', value: 116 },
-    { name: '芜湖', value: 117 },
-    { name: '唐山', value: 119 },
-    { name: '平顶山', value: 119 },
-    { name: '邢台', value: 119 },
-    { name: '德州', value: 120 },
-    { name: '济宁', value: 120 },
-    { name: '荆州', value: 127 },
-    { name: '宜昌', value: 130 },
-    { name: '义乌', value: 132 },
-    { name: '丽水', value: 133 },
-    { name: '洛阳', value: 134 },
-    { name: '秦皇岛', value: 136 },
-    { name: '株洲', value: 143 },
-    { name: '石家庄', value: 147 },
-    { name: '莱芜', value: 148 },
-    { name: '常德', value: 152 },
-    { name: '保定', value: 153 },
-    { name: '湘潭', value: 154 },
-    { name: '金华', value: 157 },
-    { name: '岳阳', value: 169 },
-    { name: '长沙', value: 175 },
-    { name: '衢州', value: 177 },
-    { name: '廊坊', value: 193 },
-    { name: '菏泽', value: 194 },
-    { name: '合肥', value: 229 },
-    { name: '武汉', value: 273 },
-    { name: '大庆', value: 279 }
-  ]
-  var geoCoordMap = {
-    江苏: [118.8062, 31.9208],
-    黑龙江: [127.9688, 45.368],
-    内蒙古: [110.3467, 41.4899],
-    吉林: [125.8154, 44.2584],
-    北京市: [116.4551, 40.2539],
-    辽宁: [123.1238, 42.1216],
-    河北: [114.4995, 38.1006],
-    天津: [117.4219, 39.4189],
-    山西: [112.3352, 37.9413],
-    陕西: [109.1162, 34.2004],
-    甘肃: [103.5901, 36.3043],
-    宁夏: [106.3586, 38.1775],
-    青海: [101.4038, 36.8207],
-    新疆: [87.9236, 43.5883],
-    四川: [103.9526, 30.7617],
-    重庆: [108.384366, 30.439702],
-    山东: [117.1582, 36.8701],
-    河南: [113.4668, 34.6234],
-    安徽: [117.29, 32.0581],
-    湖北: [114.3896, 30.6628],
-    浙江: [119.5313, 29.8773],
-    福建: [119.4543, 25.9222],
-    江西: [116.0046, 28.6633],
-    湖南: [113.0823, 28.2568],
-    贵州: [106.6992, 26.7682],
-    云南: [102.9199, 25.4663],
-    广东: [113.12244, 23.009505],
-    广西: [108.479, 23.1152],
-    海南: [110.3893, 19.8516],
-    上海: [121.4648, 31.2891]
-  }
-  var geoGpsMap = [101.4038, 36.8207]
-  var colors = '#f8c85d';
-  var convertData = function (data) {
-    var res = [];
-    for (var i = 0; i < data.length; i++) {
-      var geoCoord = geoCoordMap[data[i].name];
-      if (geoCoord) {
-        res.push({
-          name: data[i].name,
-          value: geoCoord.concat(data[i].value)
-        });
-      }
-    }
-    return res;
-  };
-  var convertToLineData = function (datas, gps) {
-    var res = [];
-    for (var i = 0; i < datas.length; i++) {
-      var dataItem = datas[i];
-      var toCoord = geoCoordMap[dataItem.name];
-      var fromCoord = gps; //郑州
-      //  var toCoord = geoGps[Math.random()*3]; 
-      if (fromCoord && toCoord) {
-        res.push([{
-          coord: fromCoord,
-          value: dataItem.value
-        }, {
-          coord: toCoord,
-        }]);
-      }
-    }
-    return res;
-  };
-  function renderItem(params, api) {
-    var coords = [
-      [116.7, 39.53],
-      [103.73, 36.03],
-      [112.91, 27.87],
-      [120.65, 28.01],
-      [119.57, 39.95]
-    ];
-    var points = [];
-    for (var i = 0; i < coords.length; i++) {
-      points.push(api.coord(coords[i]));
-    }
-    var color = api.visual('color');
-    return {
-      type: 'polygon',
-      shape: {
-        points: echarts.graphic.clipPointsByRect(points, {
-          x: params.coordSys.x,
-          y: params.coordSys.y,
-          width: params.coordSys.width,
-          height: params.coordSys.height
-        })
-      },
-      style: api.style({
-        fill: color,
-        stroke: echarts.color.lift(color)
-      })
-    };
-  }
-  const option = ref({
-    backgroundColor: 'transparent',
-    title: {
-      text: '实时物流信息',
-      sublink: 'http://www.pm25.in',
-      left: 'center',
-      textStyle: {
-        color: '#ccc',
-        fontSize: 15,
-        fontWeight: ''
-      }
-    },
-    tooltip: {
-      trigger: 'item'
-    },
-    bmap: {
-      center: [104.114129, 37.550339],
-      zoom: 5,
-      roam: false,
-      mapStyle: {
-        styleJson: [
+import { ref } from 'vue'
+import echartss from '@/components/echarts.vue'
+import 'echarts/extension/bmap/bmap';
+import china from '@/assets/china.js'
+console.log('china',china);
+const text = ref("")
+  var allData = {
+        citys: [
           {
-            featureType: 'water',
-            elementType: 'all',
-            stylers: {
-              color: '#139dcf'
-            }
+            name: "延寿",
+            value: [128.331644, 45.451897, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'land',
-            elementType: 'all',
-            stylers: {
-              color: '#020001'
-            }
+            name: "临江",
+            value: [126.918087, 41.811979, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'boundary',
-            elementType: 'geometry',
-            stylers: {
-              color: '#292c44'
-            }
+            name: "嘉兴",
+            value: [120.755486, 30.746129, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'railway',
-            elementType: 'all',
-            stylers: {
-              visibility: 'off'
-            }
+            name: "四平",
+            value: [124.350398, 43.16642, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'highway',
-            elementType: 'geometry',
-            stylers: {
-              color: '#fd5256'
-            }
+            name: "营口",
+            value: [122.235418, 40.667012, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'highway',
-            elementType: 'geometry.fill',
-            stylers: {
-              color: '#fd5256',
-              lightness: 1
-            }
+            name: "密云",
+            value: [116.801346, 40.35874, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'highway',
-            elementType: 'labels',
-            stylers: {
-              visibility: 'off'
-            }
+            name: "威海",
+            value: [122.12042, 37.513068, 32],
+            symbolSize: 3,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'arterial',
-            elementType: 'geometry',
-            stylers: {
-              color: '#004981'
-            }
+            name: "杭州",
+            value: [120.15507, 30.274085, 10],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'arterial',
-            elementType: 'geometry.fill',
-            stylers: {
-              color: '#00508b'
-            }
+            name: "集安",
+            value: [126.194031, 41.125307, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'poi',
-            elementType: 'all',
-            stylers: {
-              visibility: 'off'
-            }
+            name: "贵阳",
+            value: [106.630154, 26.647661, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'green',
-            elementType: 'all',
-            stylers: {
-              color: '#056197',
-              visibility: 'off'
-            }
+            name: "抚顺",
+            value: [123.957208, 41.880872, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'subway',
-            elementType: 'all',
-            stylers: {
-              visibility: 'off'
-            }
+            name: "海门",
+            value: [121.181615, 31.871173, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'manmade',
-            elementType: 'all',
-            stylers: {
-              visibility: 'off'
-            }
+            name: "珠海",
+            value: [113.576726, 22.270715, 9],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'local',
-            elementType: 'all',
-            stylers: {
-              visibility: 'off'
-            }
+            name: "河北",
+            value: [114.475704, 38.584854, -19],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
           },
           {
-            featureType: 'arterial',
-            elementType: 'labels',
-            stylers: {
-              visibility: 'off'
-            }
+            name: "深圳",
+            value: [114.057868, 22.543099, 14],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'boundary',
-            elementType: 'geometry.fill',
-            stylers: {
-              color: '#282c45'
-            }
+            name: "黄浦",
+            value: [121.484443, 31.231763, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'building',
-            elementType: 'all',
-            stylers: {
-              color: '#1a5787'
-            }
+            name: "蓬莱",
+            value: [120.758848, 37.810661, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
           },
           {
-            featureType: 'label',
-            elementType: 'all',
-            stylers: {
-              visibility: 'off'
-            }
-          }
-        ]
-      }
-    },
-    series: [
-      // {
-      //   type: 'effectScatter',
-      //   coordinateSystem: 'geo',
-      //   data: convertData(
-      //     data
-      //       .sort(function (a, b) {
-      //         return b.value - a.value;
-      //       })
-      //       .slice(0, 6)
-      //   ),
-      //   symbolSize: function (val) {
-      //     return val[2] / 10;
-      //   },
-      //   showEffectOn: 'render',
-      //   rippleEffect: {
-      //     brushType: 'stroke'
-      //   },
-      //   hoverAnimation: true,
-      //   itemStyle: {
-      //     normal: {
-      //       color: colors,
-      //       shadowBlur: 10,
-      //       shadowColor: colors
-      //     }
-      //   },
-      //   zlevel: 1
-      // },
-      // //地图线的动画效果
-      // {
-      //   type: 'lines',
-      //   zlevel: 2,
-      //   effect: {
-      //     show: true,
-      //     period: 4, //箭头指向速度，值越小速度越快
-      //     trailLength: 0.02, //特效尾迹长度[0,1]值越大，尾迹越长重
-      //     symbol: 'arrow', //箭头图标
-      //     symbolSize: 3 //图标大小
-      //   },
-      //   lineStyle: {
-      //     normal: {
-      //       color: colors,
-      //       width: 0.1, //尾迹线条宽度
-      //       opacity: 0.5, //尾迹线条透明度
-      //       curveness: 0.3 //尾迹线条曲直度
-      //     }
-      //   },
-      //   data: convertToLineData(data, geoGpsMap)
-      // }
-    ]
-  })
+            name: "吉林",
+            value: [126.549572, 43.837883, -364],
+            symbolSize: 14,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "甘肃",
+            value: [103.826308, 36.059421, -2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "龙井",
+            value: [129.427066, 42.766311, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "茂名",
+            value: [110.925456, 21.662999, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "丹东",
+            value: [124.354707, 40.0005, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "晋中",
+            value: [112.752695, 37.687024, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "浙江",
+            value: [120.152792, 30.267447, -2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "海城",
+            value: [122.685217, 40.882377, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "溆浦",
+            value: [110.594921, 27.908281, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "北京",
+            value: [116.407526, 39.90403, -14],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "铁岭",
+            value: [123.726166, 42.223769, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "大同",
+            value: [113.61244, 40.040295, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "金坛",
+            value: [119.597897, 31.723247, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "齐齐哈尔",
+            value: [126.661669, 45.742347, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "咸阳",
+            value: [108.708991, 34.329605, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "四川",
+            value: [104.075931, 30.651652, -5],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "福田",
+            value: [114.055036, 22.52153, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "盘锦",
+            value: [122.070714, 41.119997, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "中山",
+            value: [113.392782, 22.517646, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "福建",
+            value: [119.295144, 26.10078, -1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "泰顺",
+            value: [119.717649, 27.556884, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "宝山",
+            value: [131.401589, 46.577167, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "庆安",
+            value: [127.507825, 46.880102, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "海淀",
+            value: [116.298056, 39.959912, 32],
+            symbolSize: 3,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "大兴",
+            value: [116.341395, 39.726929, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "桦川",
+            value: [130.719081, 47.023001, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "惠州",
+            value: [114.416196, 23.111847, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "青岛",
+            value: [120.38264, 36.067082, 52],
+            symbolSize: 3,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "朝阳",
+            value: [116.443108, 39.92147, 17],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "沈阳",
+            value: [123.431475, 41.805698, 41],
+            symbolSize: 3,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "菏泽",
+            value: [115.480656, 35.23375, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "南通",
+            value: [120.894291, 31.980172, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "南充",
+            value: [106.110698, 30.837793, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "双城",
+            value: [126.312745, 45.383263, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "南京",
+            value: [118.796877, 32.060255, 17],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "新疆",
+            value: [87.627704, 43.793026, -2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "成都",
+            value: [104.066541, 30.572269, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "陕西",
+            value: [108.954239, 34.265472, -2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "黄岛",
+            value: [120.04619, 35.872664, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "温州",
+            value: [120.699367, 27.994267, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "石家庄",
+            value: [114.51486, 38.042307, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "邢台",
+            value: [114.504844, 37.070589, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "赣州",
+            value: [114.93503, 25.831829, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "义乌",
+            value: [120.075058, 29.306841, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "南昌",
+            value: [115.858198, 28.682892, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "闵行",
+            value: [121.381709, 31.112813, 18],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "长宁",
+            value: [121.424624, 31.220367, 7],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "道里",
+            value: [126.616957, 45.755777, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "乳山",
+            value: [121.539765, 36.919816, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "双流",
+            value: [103.923648, 30.574473, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "广州",
+            value: [113.264435, 23.129163, 13],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "西城",
+            value: [116.365868, 39.912289, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "佳木斯",
+            value: [130.318917, 46.799923, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "皇姑",
+            value: [123.44197, 41.824796, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "榆树",
+            value: [126.533146, 44.840288, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "临汾",
+            value: [111.518976, 36.088005, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "上海",
+            value: [121.473701, 31.230416, 44],
+            symbolSize: 3,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "内蒙古",
+            value: [111.765618, 40.817498, -23],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "尚志",
+            value: [128.009895, 45.209586, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "湖里",
+            value: [118.146769, 24.512905, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "台州",
+            value: [121.420757, 28.656386, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "潍坊",
+            value: [119.161756, 36.706774, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "苏州",
+            value: [120.585316, 31.298886, 14],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "房山",
+            value: [116.143267, 39.749144, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "即墨",
+            value: [120.447128, 36.389639, 15],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "舒兰",
+            value: [126.965607, 44.406106, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "延吉",
+            value: [129.508946, 42.891255, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "三河",
+            value: [117.078295, 39.982718, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "大连",
+            value: [121.614682, 38.914003, 40],
+            symbolSize: 3,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "辉南",
+            value: [126.046912, 42.684993, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "无锡",
+            value: [120.31191, 31.49117, 14],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "常州",
+            value: [119.973987, 31.810689, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "广西",
+            value: [108.327546, 22.815478, -1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "泉州",
+            value: [118.675676, 24.874132, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "昌平",
+            value: [116.231204, 40.22066, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "海阳",
+            value: [121.158434, 36.776378, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "郑州",
+            value: [113.625368, 34.7466, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "东城",
+            value: [116.416357, 39.928353, 10],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "黄骅",
+            value: [117.330048, 38.371383, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "武侯",
+            value: [104.04339, 30.641982, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "鸡东",
+            value: [131.12408, 45.260412, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "龙口",
+            value: [120.477813, 37.646108, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "汤原",
+            value: [129.905072, 46.730706, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "湖北",
+            value: [114.341862, 30.546498, -4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "克拉玛依",
+            value: [84.889207, 45.579889, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "厦门",
+            value: [118.089425, 24.479834, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "哈尔滨",
+            value: [126.534967, 45.803775, 8],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "秦皇岛",
+            value: [119.600493, 39.935385, 7],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "江苏",
+            value: [118.763232, 32.061707, -1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "常熟",
+            value: [120.752481, 31.654376, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "烟台",
+            value: [121.447935, 37.463822, 24],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "和平",
+            value: [117.21451, 39.116949, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "环翠",
+            value: [122.123444, 37.501991, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "宣武门外东大街",
+            value: [116.378888, 39.899332, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "张家港",
+            value: [120.553284, 31.870367, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "临安",
+            value: [119.724733, 30.233873, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "延安",
+            value: [109.489727, 36.585455, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "天津",
+            value: [117.200983, 39.084158, 28],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "城阳",
+            value: [120.39631, 36.307064, 15],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "石景山",
+            value: [116.222982, 39.906611, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "长沙",
+            value: [112.938814, 28.228209, 5],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "安徽",
+            value: [117.284923, 31.861184, -1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "昆山",
+            value: [120.980737, 31.385598, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "徐汇",
+            value: [121.436525, 31.188523, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "东港",
+            value: [124.152705, 39.863008, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "廊坊",
+            value: [116.683752, 39.538047, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "鞍山",
+            value: [122.994329, 41.108647, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "海陵",
+            value: [119.919425, 32.491016, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "黑龙江",
+            value: [126.661669, 45.742347, -198],
+            symbolSize: 8,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "西藏",
+            value: [91.117212, 29.646923, -1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "河南",
+            value: [113.274379, 34.445122, 0],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "湖南",
+            value: [112.98381, 28.112444, -1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "佛山",
+            value: [113.121416, 23.021548, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "珲春",
+            value: [130.366036, 42.862821, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "扬州",
+            value: [119.412966, 32.39421, 5],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "日照",
+            value: [119.526888, 35.416377, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "唐山",
+            value: [118.180194, 39.630867, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "同江",
+            value: [132.510919, 47.642707, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "荣成",
+            value: [122.486658, 37.16516, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "虎林",
+            value: [132.93721, 45.762686, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "武汉",
+            value: [114.305393, 30.593099, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "合肥",
+            value: [117.227239, 31.820587, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "荆州",
+            value: [112.239741, 30.335165, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "丰台",
+            value: [116.287149, 39.858427, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "山东",
+            value: [117.020359, 36.66853, -6],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "舟山",
+            value: [122.207216, 29.985295, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "连云港",
+            value: [119.221611, 34.596653, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "西安",
+            value: [108.940175, 34.341568, 3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "济南",
+            value: [117.12, 36.651216, 4],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "绵阳",
+            value: [104.679114, 31.46745, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "辽宁",
+            value: [123.42944, 41.835441, -58],
+            symbolSize: 3,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "山西",
+            value: [112.562398, 37.873532, -3],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#58B3CC" } },
+          },
+          {
+            name: "呼和浩特",
+            value: [111.749181, 40.842585, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "河西",
+            value: [117.223372, 39.109563, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "兴和",
+            value: [113.834173, 40.872301, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "重庆",
+            value: [106.551557, 29.56301, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "胶州",
+            value: [120.033382, 36.26468, 5],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "宁波",
+            value: [121.550357, 29.874557, 10],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "滨海",
+            value: [119.820831, 33.990334, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "太原",
+            value: [112.548879, 37.87059, 2],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "鸡西",
+            value: [130.969333, 45.295075, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "兰山",
+            value: [118.347707, 35.051729, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "阳泉",
+            value: [113.580519, 37.856972, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "勃利",
+            value: [130.592171, 45.755063, 1],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+          {
+            name: "长春",
+            value: [125.323544, 43.817072, 8],
+            symbolSize: 2,
+            itemStyle: { normal: { color: "#F58158" } },
+          },
+        ],
+        moveLines: [
+          {
+            fromName: "黑龙江",
+            toName: "珠海",
+            coords: [
+              [126.661669, 45.742347],
+              [113.576726, 22.270715],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "舒兰",
+            coords: [
+              [126.661669, 45.742347],
+              [126.965607, 44.406106],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "大连",
+            coords: [
+              [126.661669, 45.742347],
+              [121.614682, 38.914003],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "集安",
+            coords: [
+              [123.42944, 41.835441],
+              [126.194031, 41.125307],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "抚顺",
+            coords: [
+              [126.549572, 43.837883],
+              [123.957208, 41.880872],
+            ],
+          },
+          {
+            fromName: "山东",
+            toName: "南京",
+            coords: [
+              [117.020359, 36.66853],
+              [118.796877, 32.060255],
+            ],
+          },
+          {
+            fromName: "北京",
+            toName: "沈阳",
+            coords: [
+              [116.407526, 39.90403],
+              [123.431475, 41.805698],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "环翠",
+            coords: [
+              [126.661669, 45.742347],
+              [122.123444, 37.501991],
+            ],
+          },
+          {
+            fromName: "天津",
+            toName: "大连",
+            coords: [
+              [117.200983, 39.084158],
+              [121.614682, 38.914003],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "兴和",
+            coords: [
+              [126.549572, 43.837883],
+              [113.834173, 40.872301],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "勃利",
+            coords: [
+              [114.475704, 38.584854],
+              [130.592171, 45.755063],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "大连",
+            coords: [
+              [126.549572, 43.837883],
+              [121.614682, 38.914003],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "沈阳",
+            coords: [
+              [126.549572, 43.837883],
+              [123.431475, 41.805698],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "闵行",
+            coords: [
+              [126.661669, 45.742347],
+              [121.381709, 31.112813],
+            ],
+          },
+          {
+            fromName: "天津",
+            toName: "朝阳",
+            coords: [
+              [117.200983, 39.084158],
+              [116.443108, 39.92147],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "黄岛",
+            coords: [
+              [126.549572, 43.837883],
+              [120.04619, 35.872664],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "上海",
+            coords: [
+              [111.765618, 40.817498],
+              [121.473701, 31.230416],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "南京",
+            coords: [
+              [111.765618, 40.817498],
+              [118.796877, 32.060255],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "杭州",
+            coords: [
+              [123.42944, 41.835441],
+              [120.15507, 30.274085],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "海城",
+            coords: [
+              [126.661669, 45.742347],
+              [122.685217, 40.882377],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "西城",
+            coords: [
+              [126.549572, 43.837883],
+              [116.365868, 39.912289],
+            ],
+          },
+          {
+            fromName: "四川",
+            toName: "上海",
+            coords: [
+              [104.075931, 30.651652],
+              [121.473701, 31.230416],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "西城",
+            coords: [
+              [126.661669, 45.742347],
+              [116.365868, 39.912289],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "丹东",
+            coords: [
+              [126.549572, 43.837883],
+              [124.354707, 40.0005],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "宁波",
+            coords: [
+              [126.549572, 43.837883],
+              [121.550357, 29.874557],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "海淀",
+            coords: [
+              [123.42944, 41.835441],
+              [116.298056, 39.959912],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "青岛",
+            coords: [
+              [123.42944, 41.835441],
+              [120.38264, 36.067082],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "苏州",
+            coords: [
+              [126.549572, 43.837883],
+              [120.585316, 31.298886],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "抚顺",
+            coords: [
+              [126.661669, 45.742347],
+              [123.957208, 41.880872],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "临安",
+            coords: [
+              [126.549572, 43.837883],
+              [119.724733, 30.233873],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "烟台",
+            coords: [
+              [123.42944, 41.835441],
+              [121.447935, 37.463822],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "海淀",
+            coords: [
+              [126.661669, 45.742347],
+              [116.298056, 39.959912],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "南昌",
+            coords: [
+              [126.661669, 45.742347],
+              [115.858198, 28.682892],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "沈阳",
+            coords: [
+              [111.765618, 40.817498],
+              [123.431475, 41.805698],
+            ],
+          },
+          {
+            fromName: "山西",
+            toName: "城阳",
+            coords: [
+              [112.562398, 37.873532],
+              [120.39631, 36.307064],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "广州",
+            coords: [
+              [126.549572, 43.837883],
+              [113.264435, 23.129163],
+            ],
+          },
+          {
+            fromName: "上海",
+            toName: "沈阳",
+            coords: [
+              [121.473701, 31.230416],
+              [123.431475, 41.805698],
+            ],
+          },
+          {
+            fromName: "四川",
+            toName: "阳泉",
+            coords: [
+              [104.075931, 30.651652],
+              [113.580519, 37.856972],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "桦川",
+            coords: [
+              [114.475704, 38.584854],
+              [130.719081, 47.023001],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "海淀",
+            coords: [
+              [111.765618, 40.817498],
+              [116.298056, 39.959912],
+            ],
+          },
+          {
+            fromName: "安徽",
+            toName: "河北",
+            coords: [
+              [117.284923, 31.861184],
+              [114.475704, 38.584854],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "呼和浩特",
+            coords: [
+              [123.42944, 41.835441],
+              [111.749181, 40.842585],
+            ],
+          },
+          {
+            fromName: "广西",
+            toName: "茂名",
+            coords: [
+              [108.327546, 22.815478],
+              [110.925456, 21.662999],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "东城",
+            coords: [
+              [126.549572, 43.837883],
+              [116.416357, 39.928353],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "盘锦",
+            coords: [
+              [111.765618, 40.817498],
+              [122.070714, 41.119997],
+            ],
+          },
+          {
+            fromName: "山东",
+            toName: "哈尔滨",
+            coords: [
+              [117.020359, 36.66853],
+              [126.534967, 45.803775],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "沈阳",
+            coords: [
+              [126.661669, 45.742347],
+              [123.431475, 41.805698],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "丰台",
+            coords: [
+              [126.661669, 45.742347],
+              [116.287149, 39.858427],
+            ],
+          },
+          {
+            fromName: "四川",
+            toName: "盘锦",
+            coords: [
+              [104.075931, 30.651652],
+              [122.070714, 41.119997],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "皇姑",
+            coords: [
+              [126.661669, 45.742347],
+              [123.44197, 41.824796],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "虎林",
+            coords: [
+              [114.475704, 38.584854],
+              [132.93721, 45.762686],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "宝山",
+            coords: [
+              [123.42944, 41.835441],
+              [131.401589, 46.577167],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "吉林",
+            coords: [
+              [126.661669, 45.742347],
+              [126.549572, 43.837883],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "青岛",
+            coords: [
+              [126.661669, 45.742347],
+              [120.38264, 36.067082],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "烟台",
+            coords: [
+              [126.549572, 43.837883],
+              [121.447935, 37.463822],
+            ],
+          },
+          {
+            fromName: "山东",
+            toName: "临江",
+            coords: [
+              [117.020359, 36.66853],
+              [126.918087, 41.811979],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "黄岛",
+            coords: [
+              [126.661669, 45.742347],
+              [120.04619, 35.872664],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "石家庄",
+            coords: [
+              [126.549572, 43.837883],
+              [114.51486, 38.042307],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "汤原",
+            coords: [
+              [126.549572, 43.837883],
+              [129.905072, 46.730706],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "临江",
+            coords: [
+              [126.661669, 45.742347],
+              [126.918087, 41.811979],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "济南",
+            coords: [
+              [126.549572, 43.837883],
+              [117.12, 36.651216],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "太原",
+            coords: [
+              [126.549572, 43.837883],
+              [112.548879, 37.87059],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "威海",
+            coords: [
+              [126.549572, 43.837883],
+              [122.12042, 37.513068],
+            ],
+          },
+          {
+            fromName: "湖北",
+            toName: "深圳",
+            coords: [
+              [114.341862, 30.546498],
+              [114.057868, 22.543099],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "荣成",
+            coords: [
+              [111.765618, 40.817498],
+              [122.486658, 37.16516],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "郑州",
+            coords: [
+              [123.42944, 41.835441],
+              [113.625368, 34.7466],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "朝阳",
+            coords: [
+              [126.661669, 45.742347],
+              [116.443108, 39.92147],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "昆山",
+            coords: [
+              [126.549572, 43.837883],
+              [120.980737, 31.385598],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "双城",
+            coords: [
+              [126.549572, 43.837883],
+              [126.312745, 45.383263],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "克拉玛依",
+            coords: [
+              [126.661669, 45.742347],
+              [84.889207, 45.579889],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "上海",
+            coords: [
+              [123.42944, 41.835441],
+              [121.473701, 31.230416],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "海阳",
+            coords: [
+              [126.549572, 43.837883],
+              [121.158434, 36.776378],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "宣武门外东大街",
+            coords: [
+              [126.549572, 43.837883],
+              [116.378888, 39.899332],
+            ],
+          },
+          {
+            fromName: "山东",
+            toName: "海淀",
+            coords: [
+              [117.020359, 36.66853],
+              [116.298056, 39.959912],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "威海",
+            coords: [
+              [111.765618, 40.817498],
+              [122.12042, 37.513068],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "晋中",
+            coords: [
+              [126.661669, 45.742347],
+              [112.752695, 37.687024],
+            ],
+          },
+          {
+            fromName: "西藏",
+            toName: "广州",
+            coords: [
+              [91.117212, 29.646923],
+              [113.264435, 23.129163],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "无锡",
+            coords: [
+              [123.42944, 41.835441],
+              [120.31191, 31.49117],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "城阳",
+            coords: [
+              [126.661669, 45.742347],
+              [120.39631, 36.307064],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "丰台",
+            coords: [
+              [114.475704, 38.584854],
+              [116.287149, 39.858427],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "扬州",
+            coords: [
+              [126.661669, 45.742347],
+              [119.412966, 32.39421],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "天津",
+            coords: [
+              [123.42944, 41.835441],
+              [117.200983, 39.084158],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "扬州",
+            coords: [
+              [126.549572, 43.837883],
+              [119.412966, 32.39421],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "嘉兴",
+            coords: [
+              [126.549572, 43.837883],
+              [120.755486, 30.746129],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "延寿",
+            coords: [
+              [114.475704, 38.584854],
+              [128.331644, 45.451897],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "义乌",
+            coords: [
+              [126.549572, 43.837883],
+              [120.075058, 29.306841],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "张家港",
+            coords: [
+              [126.549572, 43.837883],
+              [120.553284, 31.870367],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "贵阳",
+            coords: [
+              [123.42944, 41.835441],
+              [106.630154, 26.647661],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "辽宁",
+            coords: [
+              [126.549572, 43.837883],
+              [123.42944, 41.835441],
+            ],
+          },
+          {
+            fromName: "河南",
+            toName: "营口",
+            coords: [
+              [113.274379, 34.445122],
+              [122.235418, 40.667012],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "合肥",
+            coords: [
+              [126.549572, 43.837883],
+              [117.227239, 31.820587],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "苏州",
+            coords: [
+              [126.661669, 45.742347],
+              [120.585316, 31.298886],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "榆树",
+            coords: [
+              [126.661669, 45.742347],
+              [126.533146, 44.840288],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "常熟",
+            coords: [
+              [126.549572, 43.837883],
+              [120.752481, 31.654376],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "乳山",
+            coords: [
+              [126.549572, 43.837883],
+              [121.539765, 36.919816],
+            ],
+          },
+          {
+            fromName: "四川",
+            toName: "青岛",
+            coords: [
+              [104.075931, 30.651652],
+              [120.38264, 36.067082],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "深圳",
+            coords: [
+              [126.661669, 45.742347],
+              [114.057868, 22.543099],
+            ],
+          },
+          {
+            fromName: "天津",
+            toName: "东城",
+            coords: [
+              [117.200983, 39.084158],
+              [116.416357, 39.928353],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "上海",
+            coords: [
+              [126.661669, 45.742347],
+              [121.473701, 31.230416],
+            ],
+          },
+          {
+            fromName: "天津",
+            toName: "宁波",
+            coords: [
+              [117.200983, 39.084158],
+              [121.550357, 29.874557],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "海门",
+            coords: [
+              [126.549572, 43.837883],
+              [121.181615, 31.871173],
+            ],
+          },
+          {
+            fromName: "山西",
+            toName: "沈阳",
+            coords: [
+              [112.562398, 37.873532],
+              [123.431475, 41.805698],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "成都",
+            coords: [
+              [126.549572, 43.837883],
+              [104.066541, 30.572269],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "南昌",
+            coords: [
+              [126.549572, 43.837883],
+              [115.858198, 28.682892],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "常州",
+            coords: [
+              [126.661669, 45.742347],
+              [119.973987, 31.810689],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "兰山",
+            coords: [
+              [111.765618, 40.817498],
+              [118.347707, 35.051729],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "河南",
+            coords: [
+              [126.549572, 43.837883],
+              [113.274379, 34.445122],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "福田",
+            coords: [
+              [126.661669, 45.742347],
+              [114.055036, 22.52153],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "常州",
+            coords: [
+              [126.549572, 43.837883],
+              [119.973987, 31.810689],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "双流",
+            coords: [
+              [126.549572, 43.837883],
+              [103.923648, 30.574473],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "潍坊",
+            coords: [
+              [126.549572, 43.837883],
+              [119.161756, 36.706774],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "延安",
+            coords: [
+              [126.549572, 43.837883],
+              [109.489727, 36.585455],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "长春",
+            coords: [
+              [123.42944, 41.835441],
+              [125.323544, 43.817072],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "南京",
+            coords: [
+              [126.661669, 45.742347],
+              [118.796877, 32.060255],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "和平",
+            coords: [
+              [123.42944, 41.835441],
+              [117.21451, 39.116949],
+            ],
+          },
+          {
+            fromName: "北京",
+            toName: "哈尔滨",
+            coords: [
+              [116.407526, 39.90403],
+              [126.534967, 45.803775],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "武汉",
+            coords: [
+              [126.549572, 43.837883],
+              [114.305393, 30.593099],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "海陵",
+            coords: [
+              [126.549572, 43.837883],
+              [119.919425, 32.491016],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "日照",
+            coords: [
+              [126.549572, 43.837883],
+              [119.526888, 35.416377],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "台州",
+            coords: [
+              [126.549572, 43.837883],
+              [121.420757, 28.656386],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "厦门",
+            coords: [
+              [123.42944, 41.835441],
+              [118.089425, 24.479834],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "贵阳",
+            coords: [
+              [126.661669, 45.742347],
+              [106.630154, 26.647661],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "鞍山",
+            coords: [
+              [126.549572, 43.837883],
+              [122.994329, 41.108647],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "荣成",
+            coords: [
+              [123.42944, 41.835441],
+              [122.486658, 37.16516],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "天津",
+            coords: [
+              [126.661669, 45.742347],
+              [117.200983, 39.084158],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "河西",
+            coords: [
+              [126.661669, 45.742347],
+              [117.223372, 39.109563],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "秦皇岛",
+            coords: [
+              [126.661669, 45.742347],
+              [119.600493, 39.935385],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "荆州",
+            coords: [
+              [126.549572, 43.837883],
+              [112.239741, 30.335165],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "东城",
+            coords: [
+              [126.661669, 45.742347],
+              [116.416357, 39.928353],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "即墨",
+            coords: [
+              [126.549572, 43.837883],
+              [120.447128, 36.389639],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "西城",
+            coords: [
+              [123.42944, 41.835441],
+              [116.365868, 39.912289],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "大兴",
+            coords: [
+              [126.661669, 45.742347],
+              [116.341395, 39.726929],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "哈尔滨",
+            coords: [
+              [114.475704, 38.584854],
+              [126.534967, 45.803775],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "江苏",
+            coords: [
+              [126.661669, 45.742347],
+              [118.763232, 32.061707],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "和平",
+            coords: [
+              [126.549572, 43.837883],
+              [117.21451, 39.116949],
+            ],
+          },
+          {
+            fromName: "江苏",
+            toName: "鸡东",
+            coords: [
+              [118.763232, 32.061707],
+              [131.12408, 45.260412],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "辉南",
+            coords: [
+              [123.42944, 41.835441],
+              [126.046912, 42.684993],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "深圳",
+            coords: [
+              [126.549572, 43.837883],
+              [114.057868, 22.543099],
+            ],
+          },
+          {
+            fromName: "福建",
+            toName: "泰顺",
+            coords: [
+              [119.295144, 26.10078],
+              [119.717649, 27.556884],
+            ],
+          },
+          {
+            fromName: "上海",
+            toName: "深圳",
+            coords: [
+              [121.473701, 31.230416],
+              [114.057868, 22.543099],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "秦皇岛",
+            coords: [
+              [126.549572, 43.837883],
+              [119.600493, 39.935385],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "徐汇",
+            coords: [
+              [126.549572, 43.837883],
+              [121.436525, 31.188523],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "石景山",
+            coords: [
+              [126.549572, 43.837883],
+              [116.222982, 39.906611],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "城阳",
+            coords: [
+              [123.42944, 41.835441],
+              [120.39631, 36.307064],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "威海",
+            coords: [
+              [126.661669, 45.742347],
+              [122.12042, 37.513068],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "惠州",
+            coords: [
+              [126.661669, 45.742347],
+              [114.416196, 23.111847],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "龙口",
+            coords: [
+              [126.549572, 43.837883],
+              [120.477813, 37.646108],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "四平",
+            coords: [
+              [126.661669, 45.742347],
+              [124.350398, 43.16642],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "南充",
+            coords: [
+              [126.549572, 43.837883],
+              [106.110698, 30.837793],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "东港",
+            coords: [
+              [114.475704, 38.584854],
+              [124.152705, 39.863008],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "西安",
+            coords: [
+              [123.42944, 41.835441],
+              [108.940175, 34.341568],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "滨海",
+            coords: [
+              [111.765618, 40.817498],
+              [119.820831, 33.990334],
+            ],
+          },
+          {
+            fromName: "河南",
+            toName: "青岛",
+            coords: [
+              [113.274379, 34.445122],
+              [120.38264, 36.067082],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "昆山",
+            coords: [
+              [126.661669, 45.742347],
+              [120.980737, 31.385598],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "长沙",
+            coords: [
+              [123.42944, 41.835441],
+              [112.938814, 28.228209],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "哈尔滨",
+            coords: [
+              [126.549572, 43.837883],
+              [126.534967, 45.803775],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "尚志",
+            coords: [
+              [114.475704, 38.584854],
+              [128.009895, 45.209586],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "东城",
+            coords: [
+              [123.42944, 41.835441],
+              [116.416357, 39.928353],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "珠海",
+            coords: [
+              [123.42944, 41.835441],
+              [113.576726, 22.270715],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "铁岭",
+            coords: [
+              [126.661669, 45.742347],
+              [123.726166, 42.223769],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "蓬莱",
+            coords: [
+              [126.661669, 45.742347],
+              [120.758848, 37.810661],
+            ],
+          },
+          {
+            fromName: "北京",
+            toName: "天津",
+            coords: [
+              [116.407526, 39.90403],
+              [117.200983, 39.084158],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "天津",
+            coords: [
+              [111.765618, 40.817498],
+              [117.200983, 39.084158],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "宁波",
+            coords: [
+              [126.661669, 45.742347],
+              [121.550357, 29.874557],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "上海",
+            coords: [
+              [126.549572, 43.837883],
+              [121.473701, 31.230416],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "佛山",
+            coords: [
+              [123.42944, 41.835441],
+              [113.121416, 23.021548],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "长宁",
+            coords: [
+              [126.549572, 43.837883],
+              [121.424624, 31.220367],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "珲春",
+            coords: [
+              [126.661669, 45.742347],
+              [130.366036, 42.862821],
+            ],
+          },
+          {
+            fromName: "山东",
+            toName: "黄浦",
+            coords: [
+              [117.020359, 36.66853],
+              [121.484443, 31.231763],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "威海",
+            coords: [
+              [123.42944, 41.835441],
+              [122.12042, 37.513068],
+            ],
+          },
+          {
+            fromName: "天津",
+            toName: "长春",
+            coords: [
+              [117.200983, 39.084158],
+              [125.323544, 43.817072],
+            ],
+          },
+          {
+            fromName: "新疆",
+            toName: "上海",
+            coords: [
+              [87.627704, 43.793026],
+              [121.473701, 31.230416],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "鸡西",
+            coords: [
+              [114.475704, 38.584854],
+              [130.969333, 45.295075],
+            ],
+          },
+          {
+            fromName: "陕西",
+            toName: "呼和浩特",
+            coords: [
+              [108.954239, 34.265472],
+              [111.749181, 40.842585],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "连云港",
+            coords: [
+              [126.549572, 43.837883],
+              [119.221611, 34.596653],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "杭州",
+            coords: [
+              [126.661669, 45.742347],
+              [120.15507, 30.274085],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "嘉兴",
+            coords: [
+              [126.661669, 45.742347],
+              [120.755486, 30.746129],
+            ],
+          },
+          {
+            fromName: "陕西",
+            toName: "盘锦",
+            coords: [
+              [108.954239, 34.265472],
+              [122.070714, 41.119997],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "同江",
+            coords: [
+              [114.475704, 38.584854],
+              [132.510919, 47.642707],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "杭州",
+            coords: [
+              [126.549572, 43.837883],
+              [120.15507, 30.274085],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "舟山",
+            coords: [
+              [126.661669, 45.742347],
+              [122.207216, 29.985295],
+            ],
+          },
+          {
+            fromName: "河南",
+            toName: "大连",
+            coords: [
+              [113.274379, 34.445122],
+              [121.614682, 38.914003],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "绵阳",
+            coords: [
+              [123.42944, 41.835441],
+              [104.679114, 31.46745],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "溆浦",
+            coords: [
+              [126.549572, 43.837883],
+              [110.594921, 27.908281],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "朝阳",
+            coords: [
+              [126.549572, 43.837883],
+              [116.443108, 39.92147],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "无锡",
+            coords: [
+              [126.549572, 43.837883],
+              [120.31191, 31.49117],
+            ],
+          },
+          {
+            fromName: "浙江",
+            toName: "沈阳",
+            coords: [
+              [120.152792, 30.267447],
+              [123.431475, 41.805698],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "湖里",
+            coords: [
+              [126.549572, 43.837883],
+              [118.146769, 24.512905],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "无锡",
+            coords: [
+              [126.661669, 45.742347],
+              [120.31191, 31.49117],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "长宁",
+            coords: [
+              [126.661669, 45.742347],
+              [121.424624, 31.220367],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "胶州",
+            coords: [
+              [123.42944, 41.835441],
+              [120.033382, 36.26468],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "青岛",
+            coords: [
+              [126.549572, 43.837883],
+              [120.38264, 36.067082],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "海淀",
+            coords: [
+              [114.475704, 38.584854],
+              [116.298056, 39.959912],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "厦门",
+            coords: [
+              [126.661669, 45.742347],
+              [118.089425, 24.479834],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "中山",
+            coords: [
+              [126.661669, 45.742347],
+              [113.392782, 22.517646],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "太原",
+            coords: [
+              [114.475704, 38.584854],
+              [112.548879, 37.87059],
+            ],
+          },
+          {
+            fromName: "新疆",
+            toName: "吉林",
+            coords: [
+              [87.627704, 43.793026],
+              [126.549572, 43.837883],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "武侯",
+            coords: [
+              [126.549572, 43.837883],
+              [104.04339, 30.641982],
+            ],
+          },
+          {
+            fromName: "北京",
+            toName: "廊坊",
+            coords: [
+              [116.407526, 39.90403],
+              [116.683752, 39.538047],
+            ],
+          },
+          {
+            fromName: "浙江",
+            toName: "临汾",
+            coords: [
+              [120.152792, 30.267447],
+              [111.518976, 36.088005],
+            ],
+          },
+          {
+            fromName: "湖北",
+            toName: "天津",
+            coords: [
+              [114.341862, 30.546498],
+              [117.200983, 39.084158],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "泉州",
+            coords: [
+              [126.661669, 45.742347],
+              [118.675676, 24.874132],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "温州",
+            coords: [
+              [126.661669, 45.742347],
+              [120.699367, 27.994267],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "唐山",
+            coords: [
+              [126.661669, 45.742347],
+              [118.180194, 39.630867],
+            ],
+          },
+          {
+            fromName: "北京",
+            toName: "铁岭",
+            coords: [
+              [116.407526, 39.90403],
+              [123.726166, 42.223769],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "即墨",
+            coords: [
+              [123.42944, 41.835441],
+              [120.447128, 36.389639],
+            ],
+          },
+          {
+            fromName: "北京",
+            toName: "上海",
+            coords: [
+              [116.407526, 39.90403],
+              [121.473701, 31.230416],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "广州",
+            coords: [
+              [126.661669, 45.742347],
+              [113.264435, 23.129163],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "廊坊",
+            coords: [
+              [126.549572, 43.837883],
+              [116.683752, 39.538047],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "荣成",
+            coords: [
+              [126.661669, 45.742347],
+              [122.486658, 37.16516],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "海城",
+            coords: [
+              [126.549572, 43.837883],
+              [122.685217, 40.882377],
+            ],
+          },
+          {
+            fromName: "湖南",
+            toName: "沈阳",
+            coords: [
+              [112.98381, 28.112444],
+              [123.431475, 41.805698],
+            ],
+          },
+          {
+            fromName: "北京",
+            toName: "青岛",
+            coords: [
+              [116.407526, 39.90403],
+              [120.38264, 36.067082],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "大连",
+            coords: [
+              [114.475704, 38.584854],
+              [121.614682, 38.914003],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "珠海",
+            coords: [
+              [111.765618, 40.817498],
+              [113.576726, 22.270715],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "房山",
+            coords: [
+              [126.661669, 45.742347],
+              [116.143267, 39.749144],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "金坛",
+            coords: [
+              [126.661669, 45.742347],
+              [119.597897, 31.723247],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "齐齐哈尔",
+            coords: [
+              [114.475704, 38.584854],
+              [126.661669, 45.742347],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "大兴",
+            coords: [
+              [126.549572, 43.837883],
+              [116.341395, 39.726929],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "密云",
+            coords: [
+              [126.549572, 43.837883],
+              [116.801346, 40.35874],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "和平",
+            coords: [
+              [126.661669, 45.742347],
+              [117.21451, 39.116949],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "龙井",
+            coords: [
+              [111.765618, 40.817498],
+              [129.427066, 42.766311],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "道里",
+            coords: [
+              [126.549572, 43.837883],
+              [126.616957, 45.755777],
+            ],
+          },
+          {
+            fromName: "山东",
+            toName: "武汉",
+            coords: [
+              [117.020359, 36.66853],
+              [114.305393, 30.593099],
+            ],
+          },
+          {
+            fromName: "甘肃",
+            toName: "常熟",
+            coords: [
+              [103.826308, 36.059421],
+              [120.752481, 31.654376],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "烟台",
+            coords: [
+              [126.661669, 45.742347],
+              [121.447935, 37.463822],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "海淀",
+            coords: [
+              [126.549572, 43.837883],
+              [116.298056, 39.959912],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "长沙",
+            coords: [
+              [126.661669, 45.742347],
+              [112.938814, 28.228209],
+            ],
+          },
+          {
+            fromName: "天津",
+            toName: "石家庄",
+            coords: [
+              [117.200983, 39.084158],
+              [114.51486, 38.042307],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "佛山",
+            coords: [
+              [126.549572, 43.837883],
+              [113.121416, 23.021548],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "黄骅",
+            coords: [
+              [123.42944, 41.835441],
+              [117.330048, 38.371383],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "中山",
+            coords: [
+              [111.765618, 40.817498],
+              [113.392782, 22.517646],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "北京",
+            coords: [
+              [126.661669, 45.742347],
+              [116.407526, 39.90403],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "三河",
+            coords: [
+              [126.661669, 45.742347],
+              [117.078295, 39.982718],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "庆安",
+            coords: [
+              [114.475704, 38.584854],
+              [127.507825, 46.880102],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "长沙",
+            coords: [
+              [126.549572, 43.837883],
+              [112.938814, 28.228209],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "西安",
+            coords: [
+              [126.661669, 45.742347],
+              [108.940175, 34.341568],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "朝阳",
+            coords: [
+              [111.765618, 40.817498],
+              [116.443108, 39.92147],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "丰台",
+            coords: [
+              [123.42944, 41.835441],
+              [116.287149, 39.858427],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "延吉",
+            coords: [
+              [126.661669, 45.742347],
+              [129.508946, 42.891255],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "长春",
+            coords: [
+              [126.661669, 45.742347],
+              [125.323544, 43.817072],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "天津",
+            coords: [
+              [126.549572, 43.837883],
+              [117.200983, 39.084158],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "昌平",
+            coords: [
+              [126.549572, 43.837883],
+              [116.231204, 40.22066],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "赣州",
+            coords: [
+              [126.549572, 43.837883],
+              [114.93503, 25.831829],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "厦门",
+            coords: [
+              [126.549572, 43.837883],
+              [118.089425, 24.479834],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "秦皇岛",
+            coords: [
+              [111.765618, 40.817498],
+              [119.600493, 39.935385],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "菏泽",
+            coords: [
+              [111.765618, 40.817498],
+              [115.480656, 35.23375],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "闵行",
+            coords: [
+              [126.549572, 43.837883],
+              [121.381709, 31.112813],
+            ],
+          },
+          {
+            fromName: "辽宁",
+            toName: "石景山",
+            coords: [
+              [123.42944, 41.835441],
+              [116.222982, 39.906611],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "珠海",
+            coords: [
+              [126.549572, 43.837883],
+              [113.576726, 22.270715],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "青岛",
+            coords: [
+              [111.765618, 40.817498],
+              [120.38264, 36.067082],
+            ],
+          },
+          {
+            fromName: "北京",
+            toName: "海门",
+            coords: [
+              [116.407526, 39.90403],
+              [121.181615, 31.871173],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "长春",
+            coords: [
+              [111.765618, 40.817498],
+              [125.323544, 43.817072],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "城阳",
+            coords: [
+              [126.549572, 43.837883],
+              [120.39631, 36.307064],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "大同",
+            coords: [
+              [126.549572, 43.837883],
+              [113.61244, 40.040295],
+            ],
+          },
+          {
+            fromName: "湖北",
+            toName: "邢台",
+            coords: [
+              [114.341862, 30.546498],
+              [114.504844, 37.070589],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "胶州",
+            coords: [
+              [126.549572, 43.837883],
+              [120.033382, 36.26468],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "重庆",
+            coords: [
+              [126.549572, 43.837883],
+              [106.551557, 29.56301],
+            ],
+          },
+          {
+            fromName: "河北",
+            toName: "佳木斯",
+            coords: [
+              [114.475704, 38.584854],
+              [130.318917, 46.799923],
+            ],
+          },
+          {
+            fromName: "甘肃",
+            toName: "大连",
+            coords: [
+              [103.826308, 36.059421],
+              [121.614682, 38.914003],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "南京",
+            coords: [
+              [126.549572, 43.837883],
+              [118.796877, 32.060255],
+            ],
+          },
+          {
+            fromName: "内蒙古",
+            toName: "日照",
+            coords: [
+              [111.765618, 40.817498],
+              [119.526888, 35.416377],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "鸡东",
+            coords: [
+              [126.549572, 43.837883],
+              [131.12408, 45.260412],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "即墨",
+            coords: [
+              [126.661669, 45.742347],
+              [120.447128, 36.389639],
+            ],
+          },
+          {
+            fromName: "江苏",
+            toName: "朝阳",
+            coords: [
+              [118.763232, 32.061707],
+              [116.443108, 39.92147],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "南通",
+            coords: [
+              [126.549572, 43.837883],
+              [120.894291, 31.980172],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "张家港",
+            coords: [
+              [126.661669, 45.742347],
+              [120.553284, 31.870367],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "三河",
+            coords: [
+              [126.549572, 43.837883],
+              [117.078295, 39.982718],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "咸阳",
+            coords: [
+              [126.549572, 43.837883],
+              [108.708991, 34.329605],
+            ],
+          },
+          {
+            fromName: "吉林",
+            toName: "中山",
+            coords: [
+              [126.549572, 43.837883],
+              [113.392782, 22.517646],
+            ],
+          },
+          {
+            fromName: "黑龙江",
+            toName: "胶州",
+            coords: [
+              [126.661669, 45.742347],
+              [120.033382, 36.26468],
+            ],
+          },
+        ],
+      };
 
+  let option = {
+        title: {
+          left: "center",
+          textStyle: {
+            color: "#fff",
+          },
+        }, 
+        legend: {
+          show: true,
+          orient: "vertical",
+          bottom:20,
+          right:20,
+          data: ["地点", "线路"],
+          textStyle: {
+            color: "#fff",
+          },
+        },
+        geo: {
+          map: "china",
+          zoom:1.5,
+          top:'100px',
+          label: {
+            emphasis: {
+              show: false,
+            },
+          },
+          roam: false, //是否允许缩放
+          itemStyle: {
+            normal: {
+              color: "rgba(51, 69, 89, .5)", //地图背景色
+              borderColor: "#516a89", //省市边界线00fcff 516a89
+              borderWidth: 1,
+            },
+            emphasis: {
+              color: "rgba(37, 43, 61, .5)", //悬浮背景
+            },
+          },
+        },
+        series: [
+          {
+            name: "地点",
+            type: "effectScatter",
+            coordinateSystem: "geo",
+            zlevel: 2,
+            rippleEffect: {
+              //涟漪特效
+              brushType: "stroke", //波纹绘制方式 stroke，fill
+              period: 4, //动画时间，值越小速度越快
+              scale: 4, //波纹圆环最大显示，值越大波纹越大
+            },
+            label: {
+              emphasis: {
+                show: true,
+                position: "right",
+                formatter: "{b}",
+              },
+            },
+            symbolSize: 2,
+            showEffectOn: "render",
+            itemStyle: {
+              normal: {
+                color: "#46bee9",
+              },
+            },
+            data: allData.citys,
+            
+          },
+          {
+            name: "线路",
+            type: "lines",
+            coordinateSystem: "geo",
+            zlevel: 2,
+            large: true,
+            effect: {
+              show: true,
+              constantSpeed: 30,
+              symbol: "arrow", //箭头图标，pin 圆点
+              symbolSize: 3, //图标大小
+              trailLength: 0, //特效尾迹长度[0,1]值越大，尾迹越长重
+            },
+            lineStyle: {
+              normal: {
+                width: 1, //尾迹线条宽度
+                opacity: 0.2, //尾迹线条透明度
+                curveness: 0.2, //尾迹线条曲直度
+              },
+            },
+            data: allData.moveLines,
+          },
+        ],
+      };
 </script>
 <template>
   <div class="Content">
-    <echarts :text="text" :option="option" />
+    <echartss :text="text" :option="option" :china="china" />
   </div>
 </template>
 <style scoped lang="scss">
 .Content {
   width: 100%;
   flex: 1;
-  border: 1px solid red;
-  height: 64.8%;
+  height: 100%;
   margin-bottom: 5px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 </style>
